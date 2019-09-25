@@ -1,0 +1,110 @@
+h1 {
+	/*font-family: 'Play', sans-serif;*/
+	font-family: 'Merriweather', serif;
+	color: beige;
+}
+
+h2 {
+	color: beige;
+}
+
+p {
+	color: beige;
+}
+article {
+	color: beige;
+}
+#head1 {
+	position: relative;
+	width: 72%;
+	margin: auto;
+	top: 120px;
+}
+#title1 {
+	top: 0;
+	left: 0;
+	position: absolute;
+}
+
+#game_main_div {
+	position: relative;
+	margin: auto;
+	width: 72%;
+	height: 40.5%;
+
+	top: 200px;
+}
+#vid_div {
+	display: inline-block;
+	position: relative;
+	width: 70%;
+}
+
+#vid {
+	width: 100%;
+	margin: 0;
+}
+
+#desc {
+	display: block;
+	position: absolute;
+	width: 28%;
+	margin-top: 0;
+	right: 0;
+	top: 0;
+	height: 100%;
+	background-color: rgba(28, 39, 30, 0.6);
+}
+
+#g_img {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0, 0;
+}
+
+#buy {
+	width: 80%;
+	left: 10%;
+	height: 9%;
+
+	display: block;
+	position: relative;
+	background-color: #adff2f;
+	box-shadow: #adff2f;
+	border: none;
+}
+
+#buy:hover {
+	box-shadow: none;
+	background-color: #c5ff6d;
+	cursor: pointer;
+}
+
+#dsc {
+	width: 100%;
+	height: 28%;
+	font-size: 90%;
+	margin-top: 50%;
+	font-family: 'Montserrat', sans-serif;
+
+	overflow: hidden;
+}
+
+#dsc:hover {
+	overflow: scroll;
+}
+#dsc::-webkit-scrollbar {
+	width: 0px;
+}
+
+.sub {
+	width: 100%;
+	height: 2%;
+	margin: 0, 0;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 300;
+	font-size: 75%;
+	color: Gray;
+}

@@ -1,0 +1,82 @@
+app.get("/search", function(req,res){
+   
+    topbar_links=["Home","Profile","SignOut"];
+    if(search_img.length===0)
+        res.redirect("/");
+    res.render("main",{links:topbar_links,gl:search_img});
+});
+
+
+app.post("/search",function(req,res){
+
+    search_img=[];
+    let search=req.body.searchVal;
+
+    let query="select * from games where upper(name) like \"%"+search.toUpperCase()+"%\" or upper(id) like \"%"+search.toUpperCase()+"%\";";
+    console.log(query);
+    db.all(query,(err,rows)=>{
+        if(err)
+            return console.error(err.message);
+        rows.forEach((row)=>{
+            search_img.push("Images/"+row.id+"/0.jpg");
+        });
+    });
+    res.redirect("/search");    
+
+});
+
+
+
+
+
+
+
+let rating=0;
+let val=59.99;
+let name="";
+let desc="";
+
+let game='';
+app.post("/game",function(req,res){
+    game=req.body.id;
+    rating=0;
+    val=59.99;
+    name="";
+    desc="";
+    let query="select * from games where ID=\""+game+"\";";
+        console.log(query);
+        db.all(query,function(err,r){
+            
+            if(err)
+                throw err;
+            console.log(r[0]);
+            console.log(r[0].name);
+            name=r[0].name;
+            desc=r[0].description;
+            rating=r[0].rating;
+        });
+
+
+    res.redirect("/game");
+});
+
+app.get("/game",function (req,res) {  
+    topbar_links=["Home","Profile","SignOut"];
+    if(game==='')
+        res.redirect("/");
+    else
+    {
+        
+
+        
+
+        res.render("game",{links:topbar_links, 
+                            vid:"Images/"+game+"/trailer.mp4",
+                            heading:name,
+                            rate:rating,
+                            description:desc,
+                            price:val
+                        });
+    }
+});
+

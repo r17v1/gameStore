@@ -1,0 +1,11 @@
+<%- include("header"); -%>
+<div id="img_box">
+<% for(let i=0;i<gl.length;i++){ %>
+    <figure>
+    <img src="<%= gl[i] %>" alt="game_image" class="gameImages">
+    </figure>
+<%}%>
+</div>
+
+
+<%- include("footer"); -%>

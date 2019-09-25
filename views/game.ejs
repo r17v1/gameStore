@@ -1,0 +1,48 @@
+<%- include("header"); -%>
+<div id="head1">
+    <h1 id="title1"><%= heading %></h1>
+    <button type="submit" id="toggle">></button>
+</div>
+<div id="game_main_div">
+    <video controls src=" <%= vid %> " type="video/mp4" id="vid"></video>
+    <div id="desc">
+        <img alt="game_image" src="<%=g_img%>" id="g_img">   
+        <article id="dsc"><%= description %></article>
+        <p class="sub">Genre : <%= gen %>  </p>
+        <p class="sub">Rating : <%= rate %>/10 </p>
+        <p class="sub">Publisher : <%= dev %> </p>
+        <p class="sub">Price: <%= price %> USD</p>
+        <button id="buy">Buy Now!</button>
+    </div>
+</div>
+<section class="newComment">
+        <form action="" method="POST" id="ReviewForm">
+            <p> 
+                Rating: <input type="number" name=rating id="ratingInp">/10 <br>
+                <textarea type="text" name="review" id="reviewInp" placeholder="Write A review!"><%=lin%></textarea>
+            </p>
+            <button type="submit" id="submitReview">Post Review</button>
+        </form>
+    </section>
+<h2 class="comm">Reviews:</h2>
+<section class="comments">
+    <% for(let i=0; i<comm.length;i++){ %>
+    <div class="comment">
+        <h3><a href="/users/<%=comm[i].id%>"><%=comm[i].id%></a> (<%=comm[i].rating%>/10)</h3>
+        <article>
+            <%=comm[i].review%>
+        </article>
+    </div>
+   <% } %>
+   
+    <% if(comm.length===0){%>
+        <div class="comment">
+            <h3><a href="#">Empty!</a> </h3>
+            <article>
+                There are no reviews for this game yet!
+            </article>
+        </div>
+    <% } %>
+</section>
+
+<%- include("footer"); -%>

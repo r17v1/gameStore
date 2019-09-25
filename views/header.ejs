@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gamer's Heaven</title>
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" href="css/style2.css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Montserrat:300i,400|Open+Sans:700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1 id="logo"><a href="/home">Gamer's<br>Heaven</a></h1>
+        <div id="search_div">
+            <div id="search_box">
+                <input type="text" placeholder="Search" id="search_text">
+            </div>
+        </div>
+        <nav>
+            <img src="images/user.svg" alt="user icon" / id="userimg">
+            <div id="dropdown">
+                <ul>
+                    <% for(let i=0; i<links.length;i++){ %>
+                        <% let la="/"+links[i];%>
+                        <li><a href="/<%=links[i]%>"> <%= links[i] %></a></li>
+                    <%}%>
+                </ul>
+            </div>
+        </nav>
+    </header>

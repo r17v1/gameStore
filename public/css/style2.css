@@ -1,0 +1,328 @@
+#title1 {
+	/*font-family: 'Play', sans-serif;*/
+	font-family: 'Merriweather', serif;
+	background: linear-gradient(to right, #36be40, yellow);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+h2 {
+	color: beige;
+}
+h3 {
+	color: beige;
+}
+
+p {
+	color: beige;
+}
+article {
+	color: beige;
+}
+#head1 {
+	position: relative;
+	width: 1230px;
+	margin: auto;
+	top: 190px;
+}
+#title1 {
+	top: 0;
+	left: 0;
+	position: relative;
+	margin: 0;
+}
+
+#game_main_div {
+	position: relative;
+	margin: auto;
+	/*height: 65vh;*/
+	height: 510px;
+	width: 1230px;
+	top: 200px;
+}
+
+#vid {
+	/*border: gray solid thin;*/
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	margin: 0;
+}
+#vid:focus {
+	outline: none;
+}
+
+#desc {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	height: 100%;
+	width: 300px;
+	margin-top: 0;
+	right: 0;
+	top: 0;
+	background-color: rgb(43, 86, 43, 0.4);
+}
+
+#g_img {
+	width: 100%;
+	position: relative;
+	top: 0;
+	left: 0;
+	margin: 0, 0;
+	/*border-bottom: gray solid thin;*/
+}
+
+#dsc {
+	width: 100%;
+	height: 33%;
+	font-size: 1em;
+	margin: 5%, 0;
+	/*
+	border-bottom: gray solid thin;
+	border-top: gray solid thin;
+	*/
+	font-family: 'Montserrat', sans-serif;
+	overflow: scroll;
+}
+
+#dsc::-webkit-scrollbar {
+	width: 0px;
+}
+.sub {
+	width: 100%;
+	height: 3.5%;
+	vertical-align: middle;
+	margin: 5%, 0;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 300;
+	font-size: 75%;
+	color: Gray;
+}
+/*
+.sub:first-of-type {
+	border-top: gray solid thin;
+}
+.sub:last-of-type {
+	border-bottom: gray solid thin;
+}*/
+
+#buy {
+	width: 80%;
+	height: 10%;
+	margin: auto;
+
+	display: block;
+	position: relative;
+	background-color: #adff2f;
+	box-shadow: #adff2f;
+	border: none;
+	transition-duration: 250ms;
+}
+
+#buy:hover {
+	box-shadow: none;
+	background-color: #c5ff6d;
+	cursor: pointer;
+}
+.comm {
+	width: 80%;
+	margin: auto;
+	top: 335px;
+	position: relative;
+	background: linear-gradient(to right, #36be40, yellow);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.comments {
+	width: 80%;
+	max-height: 400px;
+	margin: auto;
+	position: relative;
+	top: 350px;
+	/*border: gray solid thin;*/
+	overflow: scroll;
+	background-color: rgb(43, 86, 43, 0.2);
+	font-family: 'Montserrat', sans-serif;
+	border-radius: 40px 0 40px 0;
+}
+.comment {
+	border-radius: 30px 0 30px 0;
+	margin: 30px;
+	/*border: gray solid thin;*/
+	padding: 10px;
+	background-color: rgba(65, 138, 65, 0.4);
+	-moz-box-shadow: inset 0 0 10px #000000;
+	-webkit-box-shadow: inset 0 0 10px #000000;
+	box-shadow: inset 0 0 10px #000000;
+}
+.comment h3 {
+	padding: 8px;
+	border-radius: 17px;
+	color: rgba(168, 223, 60, 0.4);
+	background-color: rgba(65, 138, 65, 0.6);
+}
+.comment article {
+	color: rgb(255, 255, 255);
+}
+
+.comment a {
+	text-decoration: none;
+	color: yellowgreen;
+	transition-duration: 250ms;
+}
+.comment a:hover {
+	color: yellow;
+}
+
+.comments::-webkit-scrollbar {
+	width: 0px;
+}
+.newComment {
+	width: 80%;
+	top: 300px;
+	position: relative;
+	margin: auto;
+	background-color: rgba(65, 138, 65, 0.4);
+}
+#ReviewForm {
+	padding: 1%;
+	margin: 1%;
+}
+#ReviewForm p {
+	color: yellowgreen;
+}
+#ratingInp {
+	width: 40px;
+	background: none;
+	border: none;
+	color: white;
+	background-color: rgba(65, 138, 65, 0.4);
+	-moz-box-shadow: inset 0 0 10px #000000;
+	-webkit-box-shadow: inset 0 0 10px #000000;
+	box-shadow: inset 0 0 10px #000000;
+}
+#ratingInp:focus {
+	outline: none;
+}
+#reviewInp {
+	resize: none;
+	background: none;
+	border: none;
+	color: white;
+	height: 100px;
+	width: 100%;
+	position: relative;
+	background-color: rgba(65, 138, 65, 0.4);
+	-moz-box-shadow: inset 0 0 10px #000000;
+	-webkit-box-shadow: inset 0 0 10px #000000;
+	box-shadow: inset 0 0 10px #000000;
+}
+#reviewInp:focus {
+	outline: none;
+}
+#reviewInp::-webkit-scrollbar {
+	width: 0px;
+}
+
+#submitReview {
+	background: none;
+	border: none;
+	background-color: rgb(65, 138, 65);
+	border-radius: 5px;
+	color: yellowgreen;
+	transition-duration: 250ms;
+}
+#submitReview:hover {
+	color: yellow;
+}
+
+#toggle {
+	display: none;
+	height: 40px;
+	width: 100px;
+	font-size: 1.1em;
+	position: relative;
+	background-color: #adff2f;
+	color: white;
+	border: none;
+	line-height: 1.2em;
+	padding: 0px;
+	margin: 0;
+	transition-duration: 250ms;
+}
+#toggle:hover {
+	background-color: #c5ff6d;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 1260px) {
+	#toggle {
+		display: inline-block;
+	}
+	#game_main_div {
+		width: 80%;
+		height: 600px;
+	}
+	#vid {
+		display: block;
+		top: 100px;
+		width: 100%;
+		height: auto;
+	}
+	#desc {
+		display: none;
+		position: relative;
+		margin: auto;
+		width: 40%;
+		height: 100%;
+	}
+	#dsc {
+		height: 120px;
+	}
+	#head1 {
+		width: 80%;
+	}
+	#buy {
+		position: absolute;
+		bottom: 15px;
+		left: 8%;
+	}
+	.sub {
+		margin: 30px 0;
+	}
+}
+@media screen and (max-width: 960px) {
+	#desc {
+		width: 50%;
+	}
+}
+@media screen and (max-width: 860px) {
+	#desc {
+		width: 60%;
+	}
+}
+
+@media screen and (max-width: 660px) {
+	#desc {
+		width: 70%;
+	}
+}
+
+@media screen and (max-width: 660px) {
+	#dsc {
+		height: 190px;
+	}
+	.sub {
+		margin: 20px 0;
+	}
+}
+@media screen and (max-width: 500px) {
+	#dsc {
+		height: 210px;
+	}
+}
