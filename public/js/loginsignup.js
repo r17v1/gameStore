@@ -1,6 +1,8 @@
-if ($('#error').text().length) {
-	$('#error').text('');
-	alert('Username is taken. Please try again!');
+if ($('.error').text().length) {
+	if ($('.error').text() === 'login') {
+		alert('Username or password did not match!');
+	} else alert('Username is taken. Please try again!');
+	$('.error').text('');
 }
 
 $('.supbtn').click(function(e) {

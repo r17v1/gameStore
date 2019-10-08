@@ -3,8 +3,8 @@ const express = require('express');
 const bps = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
 const session = require('express-session');
-
 const app = express();
+const upload = require('express-fileupload');
 let db = new sqlite3.Database(__dirname + '/database/database.db', (err) => {
 	if (err) return console.error(err.message);
 	console.log('connected to database successfully!');
@@ -32,7 +32,11 @@ app.use(
 		}
 	})
 );
-
+app.use(
+	upload({
+		createParentPath: true
+	})
+);
 app.use('/', express.static('public'));
 app.use('/home', express.static('public'));
 app.use('/search/', express.static('public'));
@@ -57,13 +61,6 @@ function shuffleArray(array) {
 		array[j] = temp;
 	}
 }
-db.all('Select * from games', (err, rows) => {
-	if (err) return console.error(err.message);
-	rows.forEach((row) => {
-		//game_ids.push(row.id);
-		game_images.push('Images/' + row.id + '/0.jpg');
-	});
-});
 
 app.get('/', function(req, res) {
 	res.redirect('/home');
@@ -74,14 +71,26 @@ app.get('/home', function(req, res) {
 	topbar_links = [];
 	if (req.session.userId) {
 		topbar_links = [ 'Profile', 'Library', 'SignOut' ];
+		if (req.session.userType === 1.0) {
+			topbar_links.push('AddGame');
+		}
 	} else {
 		topbar_links = [ 'Login', 'SignUp' ];
 	}
-	shuffleArray(game_images);
-	res.render('main', {
-		links: topbar_links,
-		gl: game_images
+	game_images = [];
+	db.all('Select * from games', (err, rows) => {
+		if (err) return console.error(err.message);
+		rows.forEach((row) => {
+			//game_ids.push(row.id);
+			game_images.push('Images/' + row.id + '/0.jpg');
+		});
+		shuffleArray(game_images);
+		res.render('main', {
+			links: topbar_links,
+			gl: game_images
+		});
 	});
+
 	//}  else {
 	//res.redirect('/login');
 	//}
@@ -89,7 +98,7 @@ app.get('/home', function(req, res) {
 
 app.get('/login', function(req, res) {
 	if (req.session.userId) res.redirect('/home');
-	else res.render('login');
+	else res.render('login', { erms: '' });
 });
 app.post('/login', function(req, res) {
 	let qry = 'select * from users where id="' + req.body.userid + '" and password= "' + req.body.password + '" ;';
@@ -97,12 +106,14 @@ app.post('/login', function(req, res) {
 	db.all(qry, function(err, row) {
 		if (err) {
 			console.log(err.message);
+			res.render('login', { erms: 'login' });
 			return;
 		} else {
 			if (row.length) {
 				req.session.userId = req.body.userid;
+				req.session.userType = row[0].type;
 				res.redirect('/home');
-			} else res.redirect('/login');
+			} else res.render('login', { erms: 'login' });
 		}
 	});
 });
@@ -118,7 +129,7 @@ app.post('/signup', function(req, res) {
 	console.log(req.body);
 	const { name, userid, email, dob, password, cpassword } = req.body;
 	let qry =
-		'insert into users values("' + name + '","' + userid + '","' + email + '","' + dob + '","' + password + '");';
+		'insert into users values("' + name + '","' + userid + '","' + email + '","' + dob + '","' + password + '",0);';
 	console.log(qry);
 	db.run(qry, [], function(err) {
 		if (err) {
@@ -168,6 +179,38 @@ app.get('/search/:val', function(req, res) {
 	});
 });
 
+app.get('/library', function(req, res) {
+	if (req.session.userId) {
+		topbar_links = [ 'Home', 'Profile', 'SignOut' ];
+		if (req.session.userType === 1.0) topbar_links.push('AddGame');
+		let uid = req.session.userId;
+		let qry = 'select gid from owns where id ="' + uid + '";';
+		console.log(qry);
+		let simg = [];
+		db.all(qry, function(err, rows) {
+			if (err) {
+				res.redirect('/home');
+			} else {
+				rows.forEach((row) => {
+					simg.push('Images/' + row.gid + '/0.jpg');
+				});
+				res.render('main', { links: topbar_links, gl: simg });
+			}
+		});
+	} else res.redirect('/login');
+});
+
+app.get('/buy/:val', function(req, res) {
+	if (req.session.userId) {
+		let qry = 'insert into owns values ("' + req.session.userId + '","' + req.params.val + '");';
+		db.run(qry, [], function() {
+			res.redirect('/library');
+		});
+	} else {
+		res.redirect('/login');
+	}
+});
+
 app.get('/game/:val', function(req, res) {
 	//if (req.session.userId) {
 	topbar_links = [ 'Home' ];
@@ -179,6 +222,7 @@ app.get('/game/:val', function(req, res) {
 		topbar_links.push('Login');
 		topbar_links.push('SignUp');
 	}
+	if (req.session.userType === 1.0) topbar_links.push('AddGame');
 	let gid = req.params.val;
 	let log = '';
 	if (!req.session.userId) log = 'You must be logged in to do this!';
@@ -230,6 +274,49 @@ app.post('/game/:val', function(req, res) {
 	db.run(qry, [], function(err) {
 		res.redirect('/game/' + gid);
 	});
+});
+
+app.get('/AddGame', function(req, res) {
+	topbar_links = [ 'Home', 'Profile', 'Library', 'Signout' ];
+	if (req.session.userId && req.session.userType === 1.0) {
+		res.render('addgame', { links: topbar_links });
+	} else res.redirect('/login');
+});
+
+app.post('/AddGame', function(req, res) {
+	if (req.session.userId && req.session.userType === 1.0) {
+		let uid = req.session.userId;
+		let title = req.body.gameTitle;
+		let gid = req.body.gameId;
+		let desc = req.body.description;
+		let genres = req.body.genre;
+		let i1 = req.files.himage;
+		let i2 = req.files.gimage;
+		let trailer = req.files.trailer;
+		let price = req.body.price;
+
+		let qry =
+			'insert into games values("' +
+			gid +
+			'","' +
+			title +
+			'",1,"' +
+			desc +
+			'",' +
+			price +
+			',"' +
+			genres +
+			'",+"Gamer\'s Heaven");';
+		db.run(qry, [], function(err) {
+			if (err) console.log(err);
+		});
+
+		i1.mv(__dirname + '/public/Images/' + gid + '/0.jpg');
+		i2.mv(__dirname + '/public/Images/' + gid + '/1.jpg');
+		trailer.mv(__dirname + '/public/Images/' + gid + '/trailer.mp4');
+
+		res.redirect('/home');
+	} else res.redirect('/login');
 });
 
 app.listen(3000, function() {

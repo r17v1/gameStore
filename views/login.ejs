@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="css/style3.css">
     <link href="https://fonts.googleapis.com/css?family=Economica&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="b1">
     <div class="loginPage">
-        <h1>Login</h1>
+            <h1 class="error"><%=erms%></h2>
+        <h1 class="header1">Login</h1>
         <form action="/login" method="post">
             <input class="txtbox" type="text" name="userid" placeholder="User ID"><br>
             <input class="txtbox" type="password" name="password" placeholder="password"><br>
@@ -21,6 +22,6 @@
         </p>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="js/index1.js"></script>
+    <script src="js/loginsignup.js"></script>
 </body>
 </html>

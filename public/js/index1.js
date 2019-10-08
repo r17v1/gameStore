@@ -107,3 +107,8 @@ $('#toggle').click(function() {
 		$('#desc').css('display', 'none');
 	}
 });
+
+$('#buy').click(function() {
+	let link = window.location.href.split('/')[4];
+	window.location.href = '/buy/' + link;
+});

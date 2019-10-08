@@ -1,0 +1,18 @@
+<%- include("header"); -%>
+<link rel="stylesheet" href="css/style3.css">
+<form id="addGame" action='/AddGame' method="post"  enctype="multipart/form-data">
+    <input class="txtbox" type="text" name="gameTitle" placeholder="Game Title"><br>
+    <input class="txtbox" type="text" name="gameId" placeholder="Game ID"><br>
+    <input class="txtbox" type="number" name="price" placeholder="Price"min="0"><br>
+    <textarea type="text" name="description" class="txtbox description" placeholder="Give a summery of your game!"></textarea><br>
+    <input class="txtbox" type="text" name="genre"placeholder="Genres"><br>
+    <h2 class="fileDesc">Home Page Image:</h2>
+    <label class="btn">Choose an image! <input class="fileul" name="himage" type="file"  accept="image/*"><br></label>
+    <h2 class="fileDesc">Game Page Image:</h2>
+    <label class="btn">Choose an image!<input class="fileul" name="gimage" type="file"  accept="image/*"><br></label>
+    <h2 class="fileDesc">Trailer</h2>
+    <label class="btn">Choose a video!<input class="fileul" name="trailer" type="file"  accept="video/*"><br></label><br><br>
+    <button type="submit" name="sb" class="subbox" value="submit">Submit!</button>
+</form>
+
+<%- include("footer"); -%>
